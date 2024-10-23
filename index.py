@@ -63,3 +63,5 @@ ans = x[0] * 8                                      # We calculate the initial w
 summ_ans = sum(lst_answer) # Counting the weight after compression
 
 print('Weight before compression = ', ans, '\n', 'Weight after compression = ', summ_ans, '\n', 'Compression ratio = ', round((summ_ans/ans), 2) * 100, '%')
+
+#002Corp
