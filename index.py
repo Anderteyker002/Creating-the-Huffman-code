@@ -1,3 +1,52 @@
+from treelib import Tree
+#002Corp
+def create_tree(lst):
+    str0 = ''
+    dct = dict_unification
+    lst = lst[::2]
+    lst = lst[::-1]
+
+    for i in range(0, len(lst[0])):
+        str0 = str0 + lst[0][i]
+
+    tree = Tree()
+    tree.create_node('', str0)
+
+
+    list_of_id = [str0]
+    id = []
+    listt = []
+    
+    list_of_exceptions = []
+
+    for lists in lst:
+        if len(lists) != len(lst[0]):
+            list_of_id = id
+            id = []
+        for j in list_of_id:
+            for i in range(0, len(lists)):
+                if lists[i] not in list_of_exceptions:
+                    if j.find(lists[i]) != -1:
+                        if j != lists[i]:
+                            if len(lists[i]) > 2:
+                                tree.create_node('', lists[i], parent = j)
+                                id.append(lists[i])
+                            else:
+                                tree.create_node(lists[i], lists[i], parent = j)
+                                if len(lists[i]) == 2:
+                                    for x in range(2):
+                                        list_of_exceptions.append(lists[i][x])
+                                else:
+                                    list_of_exceptions.append(lists[i])
+                        else:
+                            listt.append(j)
+                            id = listt
+
+    print()   
+    print('The Hafman Tree:')
+    print(tree.show(stdout=False))
+    #002Corp
+
 def sort_dicts(dicts):# A function that sorts the dictionary in ascending order of values
     list_of_dict = sorted(dicts.items(), key=lambda i: i[1]) 
     list_of_dict.reverse()                                      # The dictionary is converted into a list, after which we format the resulting list and return it. A dictionary based on a formatted list
@@ -31,11 +80,18 @@ for x in lst:                   # Fill in 'dict_unification' while 0 is stored i
     dict_unification[x] = 0
 
 
+list_for_tree = []
+
+
 while len(lst) != 1: # Start the loop, which will go on until there is 1 character left in the list
 
 
     a, b = lst[-1], lst[-2]
     symbol = b + a
+
+
+    list_for_tree.append(list(sorted_dict))
+
 
     sorted_dict[symbol] = sorted_dict[a] + sorted_dict[b]  # Combine the penultimate character with the last character (as in the Huffman algorithm)
     del sorted_dict[a] # After combining, it is added as a key to the dictionary, and the characters that make up the new line are removed from the dictionary
@@ -50,6 +106,7 @@ while len(lst) != 1: # Start the loop, which will go on until there is 1 charact
         if symbol.find(j) != -1:                # The number of combinations is the number of 0 and 1. So, we can calculate how much 1 such symbol weighs just by counting how many times it was combined
             dict_unification[j] = dict_unification[j] + 1
 
+
 lst_answer = []
 
 for i in dict_unification.keys():
@@ -62,6 +119,8 @@ ans = x[0] * 8                                      # We calculate the initial w
 
 summ_ans = sum(lst_answer) # Counting the weight after compression
 
-print('Weight before compression = ', ans, '\n', 'Weight after compression = ', summ_ans, '\n', 'Compression ratio = ', round((summ_ans/ans), 2) * 100, '%')
+print()
+print(' Weight before compression = ', ans, '\n', 'Weight after compression = ', summ_ans, '\n', 'Compression ratio = ', round((summ_ans/ans), 2) * 100, '%')
+create_tree(list_for_tree)
 
 #002Corp
